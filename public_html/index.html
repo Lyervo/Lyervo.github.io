@@ -6,9 +6,10 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Ina's Tic-Tac-Toe</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
     </head>
     
     <body>
@@ -218,20 +219,44 @@ and open the template in the editor.
             }
             
         </script>
-        <button id="b1" onclick="SendInput(1,this)">[ ]</button><button id="b2" onclick="SendInput(2,this)">[ ]</button><button id="b3" onclick="SendInput(3,this)">[ ]</button>
-        <br>
-        <button id="b4" onclick="SendInput(4,this)">[ ]</button><button id="b5" onclick="SendInput(5,this)">[ ]</button><button id="b6" onclick="SendInput(6,this)">[ ]</button>
-        <br>
-        <button id="b7" onclick="SendInput(7,this)">[ ]</button><button id="b8" onclick="SendInput(8,this)">[ ]</button><button id="b9" onclick="SendInput(9,this)">[ ]</button>
-        <br>
-        <br>
-        <br>
-        <p id="message"></p>
-        <br>
-    <div id="joinGame">
-        <p>You can create or join a game by entering a game code, each game code can be used by two players only.</p>
-        <button onclick="JoinGame()">Join Game</button>
-        <input type="text" id="gameCode" placeholder="Enter your game code here...">
-    </div>
+        
+        <div id="game">
+            
+            <img src='img/ina.jpg' id='ina'>
+            <div id='boxGroupDiv'>
+                <div id='boxGroup'>
+                    <div class='box' id="b1" onclick="SendInput(1,this)">&nbsp</div><div class='box' id="b2" onclick="SendInput(2,this)">&nbsp</div><div class='box' id="b3" onclick="SendInput(3,this)">&nbsp</div>
+
+                    <div class='box' id="b4" onclick="SendInput(4,this)">&nbsp</div><div class='box' id="b5" onclick="SendInput(5,this)">&nbsp</div><div class='box' id="b6" onclick="SendInput(6,this)">&nbsp</div>
+
+                    <div class='box' id="b7" onclick="SendInput(7,this)">&nbsp</div><div class='box' id="b8" onclick="SendInput(8,this)">&nbsp</div><div class='box' id="b9" onclick="SendInput(9,this)">&nbsp</div>
+
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <img src="img/phib.jpg" id="phib">
+            <a href="https://www.patreon.com/phib" class='link'><div id="patreonphib"><img src="img/patreonlogo.svg" id="twitterlogo"><b>Phib's Patreon</b></div></a>
+            <a href="https://twitter.com/Phibonnachee" class='link'><div id="twitterphib"><img src="img/twitterlogo.png" id="patreonlogo"><b>Phib's Twitter</b></div></a>
+            <a href="https://www.etsy.com/shop/PhibOfficial" class='link'><div id="shopphib"><b>Phib's Shop</b></div></a>
+            
+            <img src="img/inaprofile.jpg" id="inaprofile">
+            <a href="https://www.youtube.com/channel/UCMwGHR0BTZuLsmjY_NT5Pwg" class='link'><div id="youtubeina"><img src="img/youtubelogo.png" id="twitterlogo"><b>Ina's Channel</b></div></a>
+            <a href="https://twitter.com/ninomaeinanis" class='link'><div id="twitterina"><img src="img/twitterlogo.png" id="patreonlogo"><b>Ina's Twitter</b></div></a>
+            <a href="https://en.hololive.tv/" class='link'><div id="hololiveen"><b>HoloLiveEN</b></div></a>
+            
+            <center>
+                <div id="message">
+                    <b>
+                        Meesage here
+                    </b>
+                </div>
+                
+            </center>
+            
+            
+        </footer>
+        
     </body>
 </html>

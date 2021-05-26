@@ -1,0 +1,221 @@
+body 
+{
+  background-image: url("img/repeating_pattern.jpg");
+  background-repeat: repeat;
+  overflow: hidden;
+}
+
+#game
+{
+    display: block;
+    margin: auto;
+}
+
+#ina
+{
+    height: auto;
+    width: 70%;
+    margin: auto;
+    display: block;
+}
+
+#boxGroupDiv
+{
+    display: inline-block; 
+}
+
+#boxGroup {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 16%;
+    height: 30%;
+    transform: translate(-50%, -50%);
+    display: inline-grid;
+    grid-gap: 5%;
+    grid-template-columns: repeat(3, minmax(10%, 1fr));
+    grid-template-rows: repeat(3, minmax(10%, 1fr));
+}
+
+.box {
+  background: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 80%;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+.box:hover
+{
+    transform: scale(1.1);
+}
+
+#phib
+{
+    width: 7%;
+    border-radius: 50%;
+    height: auto;
+    position: absolute;
+    left: 1%;
+    top: 2%;
+}
+
+#twitterphiblink
+{
+    width: 7%;
+    height: auto;
+}
+
+#twitterphib
+{
+    position: absolute;
+    top: 6%;
+    left: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: #00ACEE;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+}
+
+#shopphib
+{
+    position: absolute;
+    top: 45%;
+    left: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: #EB6D20;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+    text-align: center;
+}
+
+#patreonphib
+{
+    position: absolute;
+    top: 25%;
+    left: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: orange;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+}
+
+#patreonlogo
+{
+    width: 12%;
+    height: auto;
+    padding-right: 5%;
+    padding-left:3%;
+}
+
+#twitterlogo
+{
+    width: 12%;
+    height: auto;
+    padding-right: 5%;
+    padding-left:3%;
+}
+
+.link
+{
+    text-decoration: none;
+    color: white;
+}
+
+.link:visited
+{
+    color: white;
+}
+
+
+#inaprofile
+{
+    width: 7%;
+    border-radius: 50%;
+    height: auto;
+    position: absolute;
+    right: 1%;
+    top: 2%;
+}
+
+#twitterphiblink
+{
+    width: 7%;
+    height: auto;
+}
+
+#twitterina
+{
+    position: absolute;
+    top: 6%;
+    right: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: #00ACEE;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+}
+
+#hololiveen
+{
+    position: absolute;
+    top: 45%;
+    right: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: #44c4f3;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+    text-align: center;
+}
+
+#youtubeina
+{
+    position: absolute;
+    top: 25%;
+    right: 9%;
+    text-decoration: none;
+    color: white;
+    background-color: #c4302b;
+    width: 10%;
+    height: auto;
+    padding: 0.3%;
+    border-radius: 9999px;
+}
+
+#message
+{
+    color: white;
+    padding-top: 1%;
+    font-size: 2em;
+}
+
+
+
+footer
+{
+    position: absolute;
+    left: 0%;
+    bottom: -5%;
+    height: 25%;
+    width: 100%;
+    background-color: black;
+}
