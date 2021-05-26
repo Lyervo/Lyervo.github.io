@@ -18,6 +18,7 @@ and open the template in the editor.
             const interval = 1000;
             
             var intervalId = -1;
+            var timeoutId = -1;
             
             var gameCode = "";
             var twoPlayer = false;
@@ -27,47 +28,34 @@ and open the template in the editor.
             var gameOver = false;
             function SendInput(x,b)
             {
-                console.log("run");
-                
                 if (gameOver)
                 {
                     DisplayMessgae("This game is over, you can refresh this page and use a new code to join.");
                     return;
                 }
-                
+
                 if (gameCode.length === 0 || !twoPlayer)
                 {
-                    DisplayMessage("You must create or join a game with another player before you can play.");
-                    console.log("0");
+                    DisplayMessage("You must create or join a game with another player before you can play.",true);
                     return;
                 }
-                
                 if (!iCanMove)
                 {
-                    DisplayMessage("Please wait for your turn.");
-                    console.log("1");
+                    DisplayMessage("Please wait for your turn.",true);
                     return;
                 }
-                
                 if (iHaveMoved)
                 {
-                    DisplayMessage("Please wait for your turn");
-                    console.log("2");
+                    DisplayMessage("Please wait for your turn",true);
                     return;
                 }
-                
-                if (b.innerHTML !== "[ ]")
+                if (b.childNodes[1].className !== "n")
                 {
-                    console.log("3");
                     return;
                 }
-                
-                console.log("4");
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log("5");
-                        console.log(this.responseText);
                         DisplayMessage("Wait for the other player to move...");
                         UpdateGame(JSON.parse(this.responseText).game);
                         
@@ -83,17 +71,29 @@ and open the template in the editor.
                 {
                     var box = document.getElementById("b"+(i+1));
                     
-                    if (gameData.box[i] == 0)
+                    if (i == 0)
                     {
-                        box.innerHTML = "[ ]";
+                        console.log(gameData.box[i] + "+" + box.childNodes[1].className);
                     }
-                    else if (gameData.box[i] == 1)
+                    
+                    
+                    if (gameData.box[i] == 0 && box.childNodes[1].className !== "n")
                     {
-                        box.innerHTML = "[X]";
+                        box.childNodes[1].style.display = "hidden";
                     }
-                    else if (gameData.box[i] == 2)
+                    else if (gameData.box[i] == 1 && box.childNodes[1].className !== "x")
                     {
-                        box.innerHTML = "[O]";
+   
+                        box.childNodes[1].src = "img/x.png";
+                        box.childNodes[1].style.display = "block";
+                        box.childNodes[1].className = "x";
+                    }
+                    else if (gameData.box[i] == 2 && box.childNodes[1].className !== "o")
+                    {
+      
+                        box.childNodes[1].src = "img/o.png";
+                        box.childNodes[1].style.display = "block";
+                        box.childNodes[1].className = "o";
                     }
                 }
                 
@@ -110,7 +110,6 @@ and open the template in the editor.
                 {
                     iCanMove = false;
                 }
-                console.log("game"+gameData.win);
                 if (gameData.win == playerId)
                 {
                     DisplayMessage("You won!");
@@ -164,9 +163,19 @@ and open the template in the editor.
                 xhttp.send();
             }
             
-            function DisplayMessage(message)
+            function DisplayMessage(message, remove)
             {
                 document.getElementById("message").innerHTML = message;
+                clearTimeout(timeoutId);
+                if (remove != null && remove)
+                {
+                    timeoutId = setTimeout(ClearMessage,5000);
+                }
+            }
+            
+            function ClearMessage()
+            {
+                document.getElementById("message").innerHTML = "";remove 
             }
             
             function JoinGame()
@@ -175,13 +184,13 @@ and open the template in the editor.
                 
                 if (code.length === 0)
                 {
-                    DisplayMessage("Please enter a code");
+                    DisplayMessage("Please enter a code",true);
                     return;
                 }
                 
                 if (gameCode == code)
                 {
-                    DisplayMessage("You're the creator of this game, please wait for your friend to join.");
+                    DisplayMessage("You're the creator of this game, please wait for your friend to join.",true);
                     return;
                 }
         
@@ -191,7 +200,7 @@ and open the template in the editor.
                         var json = JSON.parse(this.responseText);
                         if (json.status == "FULL")
                         {
-                            DisplayMessage("This game already has 2 player.");
+                            DisplayMessage("This game already has 2 player.",true);
                         }
                         else if (json.status == "CREATED")
                         {
@@ -200,7 +209,7 @@ and open the template in the editor.
                                 playerId = 1;
                                 gameCode = code;
                                 DisplayMessage("You have created a game, you will be notified when another player join the game.");
-                                document.getElementById("joinGame").style.display = "none";
+                                document.getElementById("input").style.display = "none";
                                 intervalId = setInterval(RegularUpdate, interval);
                             }
                         }
@@ -209,7 +218,7 @@ and open the template in the editor.
                             playerId = 2;
                             gameCode = code;
                             DisplayMessage("You have joined a game.");
-                            document.getElementById("joinGame").style.display = "none";
+                            document.getElementById("input").style.display = "none";
                             intervalId = setInterval(RegularUpdate, interval);
                         }
                     }
@@ -220,16 +229,22 @@ and open the template in the editor.
             
         </script>
         
+        <div id="input">
+            <input type="text" id="gameCode" placeholder="Enter game code here...">
+            <br>
+            <button onclick="JoinGame()">Join Game</button>
+        </div>
+        
         <div id="game">
             
             <img src='img/ina.jpg' id='ina'>
             <div id='boxGroupDiv'>
                 <div id='boxGroup'>
-                    <div class='box' id="b1" onclick="SendInput(1,this)">&nbsp</div><div class='box' id="b2" onclick="SendInput(2,this)">&nbsp</div><div class='box' id="b3" onclick="SendInput(3,this)">&nbsp</div>
+                    <div class='box' id="b1" onclick="SendInput(1,this)">&nbsp<img class="n" hidden></div><div class='box' id="b2" onclick="SendInput(2,this)">&nbsp<img class="n" hidden></div><div class='box' id="b3" onclick="SendInput(3,this)">&nbsp<img class="n" hidden></div>
 
-                    <div class='box' id="b4" onclick="SendInput(4,this)">&nbsp</div><div class='box' id="b5" onclick="SendInput(5,this)">&nbsp</div><div class='box' id="b6" onclick="SendInput(6,this)">&nbsp</div>
+                    <div class='box' id="b4" onclick="SendInput(4,this)">&nbsp<img class="n" hidden></div><div class='box' id="b5" onclick="SendInput(5,this)">&nbsp<img class="n" hidden></div><div class='box' id="b6" onclick="SendInput(6,this)">&nbsp<img class="n" hidden></div>
 
-                    <div class='box' id="b7" onclick="SendInput(7,this)">&nbsp</div><div class='box' id="b8" onclick="SendInput(8,this)">&nbsp</div><div class='box' id="b9" onclick="SendInput(9,this)">&nbsp</div>
+                    <div class='box' id="b7" onclick="SendInput(7,this)">&nbsp<img class="n" hidden></div><div class='box' id="b8" onclick="SendInput(8,this)">&nbsp<img class="n" hidden></div><div class='box' id="b9" onclick="SendInput(9,this)">&nbsp<img class="n" hidden></div>
 
                 </div>
             </div>
@@ -249,7 +264,7 @@ and open the template in the editor.
             <center>
                 <div id="message">
                     <b>
-                        Meesage here
+                        Hello! Enter a game code to create a game, if the game code is already created, you will join the game instead.
                     </b>
                 </div>
                 
